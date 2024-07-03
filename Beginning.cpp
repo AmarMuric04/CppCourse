@@ -54,8 +54,8 @@ int main()
   auto end = chrono::high_resolution_clock::now();
 
   chrono::duration<double> duration = end - start;
-
   cout
       << duration.count() << endl;
+
   return 0;
 }
