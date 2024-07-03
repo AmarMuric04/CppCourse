@@ -6,7 +6,7 @@ class Book
 public:
   string Title;
   string Author;
-  int *Rates;
+  float *Rates;
   int RatesCounter;
 
   Book(string title, string author)
@@ -14,7 +14,7 @@ public:
     Title = title;
     Author = author;
     RatesCounter = 2;
-    Rates = new int[RatesCounter];
+    Rates = new float[RatesCounter];
     Rates[0] = 4;
     Rates[0] = 5;
 
