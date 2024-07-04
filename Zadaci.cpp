@@ -484,7 +484,6 @@ int main()
 
   return 0;
 }
-*/
 
 class Datum
 {
@@ -619,5 +618,269 @@ int main()
   Datum datum1(4, 20, 2005);
   cout << datum1;
 
+  return 0;
+}
+
+class Vektor
+{
+
+public:
+  int vektor[3];
+  Vektor(const int vektori[])
+  {
+    for (int i = 0; i < 3; i++)
+      vektor[i] = vektori[i];
+  }
+
+  int getX()
+  {
+    return vektor[0];
+  }
+  int getY()
+  {
+    return vektor[1];
+  }
+  int getZ()
+  {
+    return vektor[2];
+  }
+
+  void ispis()
+  {
+    for (int v : vektor)
+      cout << v << "   ";
+    cout << endl;
+  }
+  Vektor dodajVektore(Vektor &v1, Vektor &v2)
+  {
+    return v1 + v2;
+  }
+
+  friend Vektor operator+(Vektor &, Vektor &);
+  friend Vektor operator*(Vektor &, int);
+  friend Vektor operator++(Vektor &);
+  friend Vektor operator-(Vektor &, Vektor &);
+};
+
+Vektor operator+(Vektor &v1, Vektor &v2)
+{
+  int newVektor[3];
+  for (int i = 0; i < 3; i++)
+    newVektor[i] = v1.vektor[i] + v2.vektor[i];
+
+  Vektor finalVektor(newVektor);
+  return finalVektor;
+}
+Vektor operator*(Vektor &v1, int num)
+{
+  int newVektor[3];
+  for (int i = 0; i < 3; i++)
+    newVektor[i] = v1.vektor[i] * num;
+
+  Vektor finalVektor(newVektor);
+  return finalVektor;
+}
+Vektor operator++(Vektor &v1)
+{
+  int newVektor[3];
+  for (int i = 0; i < 3; i++)
+    newVektor[i] = v1.vektor[i]++;
+
+  Vektor finalVektor(newVektor);
+  return finalVektor;
+}
+Vektor operator-(Vektor &v1, Vektor &v2)
+{
+  int newVektor[3];
+  for (int i = 0; i < 3; i++)
+    newVektor[i] = v1.vektor[i] - v2.vektor[i];
+
+  Vektor finalVektor(newVektor);
+  return finalVektor;
+}
+
+int main()
+{
+  int vektori1[3] = {1, 2, 3};
+  Vektor vek1(vektori1);
+  int vektori2[3] = {6, 4, 2};
+  Vektor vek2(vektori2);
+
+  Vektor vek3 = vek2.dodajVektore(vek2, vek1);
+  Vektor vek4 = vek3 * 5;
+  vek3.ispis();
+  vek4.ispis();
+
+  Vektor vek5 = vek4 - vek3;
+  vek5.ispis();
+
+  return 0;
+}
+
+class Datum
+{
+private:
+  int Dan, Mesec, Godina;
+
+public:
+  Datum(int dan, int mesec, int godina) : Dan(dan), Mesec(mesec), Godina(godina){};
+
+  Datum(const Datum &datum)
+  {
+    Dan = datum.Dan;
+    Mesec = datum.Mesec;
+  }
+
+  Datum() : Dan(1), Mesec(1), Godina(2000){};
+
+  int getDan()
+  {
+    return Dan;
+  }
+  int getMesec()
+  {
+    return Mesec;
+  }
+  int getGodina()
+  {
+    return Godina;
+  }
+
+  friend ostream &operator<<(ostream &COUT, Datum &datum);
+  friend bool uporediDatum(Datum &, Datum &, int *, int *, int *);
+};
+
+ostream &operator<<(ostream &COUT, Datum &datum)
+{
+  COUT << datum.Godina << "." << datum.Mesec << "." << datum.Dan << endl;
+  return COUT;
+}
+
+bool uporediDatum(Datum &datum1, Datum &datum2, int *rDana, int *rMeseci, int *rGodina)
+{
+  *rDana = datum1.Dan - datum2.Dan;
+  *rMeseci = datum1.Mesec - datum2.Mesec;
+  *rGodina = datum1.Godina - datum2.Godina;
+};
+
+class Rodjendan : public Datum
+{
+private:
+  string ImeOsobe;
+  string PrezimeOsobe;
+  int Dan, Mesec, Godina;
+
+public:
+  Rodjendan(const string &imeOsobe, const string &prezimeOsobe, int dan, int mesec, int godina) : Datum(dan, mesec, godina), ImeOsobe("Amar"), PrezimeOsobe("Muric")
+  {
+  }
+
+  bool DaLiJe(Datum &datum)
+  {
+    int rDana, rMeseci, rGodina;
+    uporediDatum(*this, datum, &rDana, &rMeseci, &rGodina);
+    if (rDana == 0 && rMeseci == 0 && rGodina == 0)
+      return true;
+    else
+      return false;
+  }
+  void IspisSlavljenika(Datum &datum)
+  {
+    if (DaLiJe(datum))
+      cout << "Srecan rodjendan \n";
+    else
+    {
+
+      int rDana, rMeseci, rGodina;
+      uporediDatum(*this, datum, &rDana, &rMeseci, &rGodina);
+
+      if (rMeseci >= 0)
+        rMeseci = abs(rMeseci - 12);
+      if (rDana >= 0)
+        rDana = rDana + 31;
+      if (rDana > 31)
+      {
+        rMeseci++;
+        rDana -= 31;
+      }
+      if (rMeseci > 12)
+        rMeseci = 11;
+      cout << "Vas rodjendan je za " << rMeseci << " meseci i " << rDana << "dana\n";
+    }
+  }
+  int BrojGodina(Datum &datum)
+  {
+    int rDana, rMeseci, rGodina;
+    uporediDatum(*this, datum, &rDana, &rMeseci, &rGodina);
+
+    if (this->getMesec() == datum.getMesec() && this->getDan() == datum.getDan())
+      return rGodina;
+    else
+      return abs(rGodina) - 1;
+  }
+};
+
+int main()
+{
+  Rodjendan Osoba("Amar", "Muric", 10, 2, 2004);
+  Datum dat(4, 7, 2024);
+
+  Osoba.DaLiJe(dat) ? cout << "Srecan rodj!\n" : cout << "Nije ti rodj...\n";
+
+  cout << "Amar ima " << Osoba.BrojGodina(dat) << " godina" << endl;
+  Osoba.IspisSlavljenika(dat);
+
+  return 0;
+}
+*/
+
+/*
+Napraviti program koji ce realizovati klase izraz1 i izraz2.
+Izraz1 se sastoji od sledecih obelezja:
+char op1  - promenljiva znakovnog tipa koja obelezava operaciju (+,-,*,/)
+operand1 - celobrojna promenljiva prvi operand
+operand2 - celobrojna promenljiva drugi operand
+Metode konstruktor bez argumenata postavlja operaciju na + a operande na 2 i 5;
+Konstruktor sa argumentima (operand1, operancd2, operacija1)
+set i get metode;
+polimorfna metoda double izracunaj() - racuna rezultat na osnovu operacije (sabiranje, mnozenje, deljenje ili oduzimanje)
+metoda ispis() - ispisuje operand1 operand2 i operaciju.
+Klasa izraz2 nasledjuje klasu izraz1 i dodaje jos op2 - operacija 2
+i operand3 - celobrojna promenljiva koja predstavlja treci operand.
+Metode:Konstruktor bez argumenata (postavlja operande na 2, 5 i 3 a operacija na + i *)
+Konstruktor sa argumentima.set i get metode.
+polimorfnu metodu double izracunaj() koja racuna rezultat ali sada vodi racuna o prioritetu koja operacija se prva izvodi (* i /) pa tek onda (+ i -);
+void ispis() ispisuje obelezja();
+Testirate sve metode u glavom programu.
+*/
+/*
+Napisati program za realizaciju klasa Ispit i BIspit. Bispit nasledjuje klasu Ispit.
+Ispit ima sledece podatke:Ime – string,prezime – string,naziv_predmeta – string,broj_poena_ispit - ceo broj,ocena - ceo broj.
+Metode:konstruktor bez argumenata,Konstruktor sa argumentima (ime, prezime, naziv_predmeta, broj_poena_ispit),ocena() - formira ocenu na osnovu broja bodova (55-64 ocena 6 ...),polozi() polimorfna metoda koja unosi broj bodova na ispitu i formira ocenu
+Klasa Bispit dodatni podaci:Predispitni_poeni - ceo broj,max_poena_po - maksimalan broj poena na predispitnim obavezama koje je student mogao da osvoji
+Metode:Konstruktor bez argumenata,Konstruktor sa argumentima (ime,prezime,naziv_predmeta, broj_poena_ispit, predispitni_poeni,max_poena_po)
+unesi_predispitne() - unosi predispitne poene za studenta
+polozi() - polimorfna metoda koja formira ocenu na osnovu poena osvojenih na ispitu i predispitnih poena (student mora da je osvjoio vise od polovina od maksimalnih poena na kolokvijumima i ukupno 55-64 ocena 6
+U glavnom programu testirati sve metode...
+*/
+
+template <class T>
+T getMaxValue(T a, T b)
+{
+  T m = a;
+  if (b > m)
+    m = b;
+  return m;
+}
+
+int main()
+{
+
+  int result = getMaxValue(4, 5);
+  cout << result << endl;
+
+  string res = getMaxValue("amar", "murga");
+  char r = getMaxValue('a', 'b');
+  cout << r << endl;
   return 0;
 }
