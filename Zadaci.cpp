@@ -864,6 +864,7 @@ polozi() - polimorfna metoda koja formira ocenu na osnovu poena osvojenih na isp
 U glavnom programu testirati sve metode...
 */
 
+/*
 template <class T>
 T getMaxValue(T a, T b)
 {
@@ -873,14 +874,189 @@ T getMaxValue(T a, T b)
   return m;
 }
 
+template <class T>
+T razmeniVrednost(T &a, T &b)
+{
+  T temp = a;
+  a = b;
+  b = temp;
+};
+
+template <class T>
+T unesiVrednost(T *x, int duzina)
+{
+  for (int i = 0; i < duzina; i++)
+    cin >> x[i];
+};
+
+template <class T>
+T ispis(T *x, int duzina)
+{
+  cout << "Clanovi niza su: ";
+  for (int i = 0; i < duzina; i++)
+    cout << x[i] << "   ";
+  cout << endl;
+};
+
+template <class T>
+double sr_vr(T *a, int n)
+{
+  T zbir = 0;
+  double srednja;
+  for (int i = 0; i < n; i++)
+    zbir += *(a + i);
+
+  srednja = zbir / n;
+  return srednja;
+};
+
 int main()
 {
 
-  int result = getMaxValue(4, 5);
-  cout << result << endl;
+  // int result = getMaxValue(4, 5);
+  // cout << result << endl;
 
-  string res = getMaxValue("amar", "murga");
-  char r = getMaxValue('a', 'b');
-  cout << r << endl;
+  // string res = getMaxValue("amar", "murga");
+  // char r = getMaxValue('a', 'b');
+  // cout << r << endl;
+
+  // int a, b;
+  // char c1, c2;
+  // cout << "Unesite brojeve";
+  // cin >> a >> b;
+  // cout << "Unesite karaktere";
+  // cin >> c1 >> c2;
+  // razmeniVrednost(a, b);
+  // razmeniVrednost(c1, c2);
+  // cout << "a=" << a << " b=" << b << endl;
+  // cout << "c1=" << c1 << " c2=" << c2 << endl;
+
+  int n, m, i;
+  int a[20];
+  double b[20];
+  double sr1, sr2;
+  cout << "Unesite broj clanova prvog niza" << endl;
+  cin >> n;
+  cout << "Unesite elemente prvog niza\n";
+  unesiVrednost(a, n);
+  cout << "Unesite broj clanova drugog niza" << endl;
+  cin >> m;
+  cout << "Unesite elemente drugog niza\n";
+  unesiVrednost(b, m);
+  sr1 = sr_vr(a, n);
+  sr2 = sr_vr(b, m);
+  cout << "Srednja vrednost elemenata prvog niza je  " << sr1 << endl;
+  cout << "Srednja vrednost elemenata drugog niza je  " << sr2 << endl;
+
+  return 0;
+}
+*/
+/*
+Realizovati klase Radnik i Sef koje imaju ime, prezime i platu, metode konstruktor bez argumenata i ispis().
+Klasa Firma je generička klasa koja ima niz (Radnika, Sefova) i broj Radnika/Sefova koji je podrazumevano 10. Metodu plate() koja ispisuje podatke o Radnicima/Sefovima.
+Kreirati 2 Firme, jednu Firmu Sefova (koja ima 10 Sefova) i Firmu Radnika (koja ima 3 Radnika).
+*/
+/*
+Napisati primer generičke funkcije (ne sme se koristiti primer sa prezentacije)?
+Napisati primer generičke funkcije za nalaženje najmanjeg elementa niza?
+Napisati primer generičke funkcije za računanje kvadrata unetog broja?
+Napisati primer šablon klase za klasu Polinom koja ima koeficijente (cele ili realne brojeve) i stepen polinoma?
+Realizovati klasu Student koja ima ime, prezime, indeks, prosek. Metode konstruktor bez argumenata i metodu ispis.
+Realizovati klasu Ucenik koja ima ime, prezime, odeljenje, prosek. Metode konstruktor bez argumenata i metodu ispis.
+Napisati primer šablon klase za klasu Grupa koja ima niz (ucenika ili studenata) i broj_clanova tipa int (podrazumevano 30).
+Realiovati metodu unutar klase Grupa koja će ispisati podatke o svim članovima grupe (učenicima ili studentima).
+*/
+/*
+Realizovati na jeziku C++ sledeći sistem klasa (klase opremiti onim konstruktorima, destruktorom i operatorima za dodelu vrednosti, koji su potrebni za bezbedno i efikasno
+korišćenje klasa; greške prijavljivati izuzecima tipa jednostavnih klasa koje su opremljene
+pisanjem teksta poruke):
+Datum sadrži celobrojne mesec i godinu, koji mogu da se dohvate. Može da se
+utvrdi jednakost (==) ili različitost (!=) dva datuma. Može da se upiše u izlazni tok (<<) u
+obliku mesec/godina.
+Apstraktna karta sadrži automatski generisan jedinstven celobrojan identifikator. Može da
+joj se proveri valjanost na osnovu zadate cene vožnje i datuma. Ne može da se kopira ni na koji
+način. Može da se upiše u izlazni tok (<<), kada se upisuje identifikator.
+Mesečna karta ima zadato ime vlasnika (string), godinu i mesec važenja. Važenje
+može da se produži za zadati mesec i godinu. Mesečna karta je valjana ako je važeća zadatog
+datuma. Može da se upiše u izlazni tok (<<) u obliku vlasnik(karta)datum.
+Pojedinačna karta ima zadat uplaćen iznos (realan broj), podrazumevano 50. Iznos na karti
+može da se dopuni zadatim iznosom. Karta je valjana ako je iznos na karti veći od cene vožnje
+zadate prilikom provere. Tada se iznos na karti umanjuje za zadatu cenu. Može da se upiše u
+izlazni tok (<<) u obliku iznos(karta).
+*/
+/*
+Zbirka sadrži neki broj pokazivača na neki tip. Stvara se prazna, nakon čega se
+podaci dodaju (z<<pok) i uzimaju (z>>pok) pojedinačno, po adresi. Zbirka funkcioniše po
+principu kružnog (FIFO) bafera. Greška je ako se pokuša dodavanje u punu zbirku ili uzimanje
+iz prazne. Zbirka može da se isprazni i da se odredi koliko mesta je zauzeto. Pri kopiranju se ne
+kopiraju pokazani podaci.
+Aparat za proveru karata sadrži zbirku od nekog broja karata, podrazumevano 10. Može da se
+doda jedna karta (a+=&k) i da se proveri valjanost svih karata u sadržanoj zbirci, zadavanjem
+cene karte i datuma. Provera se vrši tako što se svaka karta proverava, a zatim na standardnom
+izlazu ispiše Karta karta valjanost, gde valjanost može imati vrednost "valjana" ili
+"nije valjana". Aparat ne može da se kopira na bilo koji način.
+
+Napisati na jeziku C++ program koji stvori jedan aparat za proveru i u njega doda
+nekoliko karata, a zatim izvrši provera. Koristiti fiksne parametre – nije potrebno ništa učitati s glavnog ulaza
+*/
+
+class Vocka
+{
+private:
+  double GodisnjiPrihod;
+
+public:
+  string Naziv;
+  int ZivotniVek;
+  int TrenutnaStarost;
+
+  Vocka(const string &naziv, double godisnjiPrihod, int zivotniVek) : Naziv(naziv), GodisnjiPrihod(godisnjiPrihod), ZivotniVek(zivotniVek), TrenutnaStarost(0) {}
+
+  Vocka(const Vocka &other)
+      : Naziv(other.Naziv), GodisnjiPrihod(other.GodisnjiPrihod), ZivotniVek(other.ZivotniVek), TrenutnaStarost(other.TrenutnaStarost) {}
+
+  double getGodisnjiPrihod()
+  {
+    return GodisnjiPrihod;
+  }
+  int getPreostaleGodineZivota()
+  {
+    return ZivotniVek - TrenutnaStarost;
+  }
+
+  friend Vocka &operator++(Vocka &, int);
+
+  friend ostream &operator<<(ostream &, Vocka &);
+};
+
+class Vocnjak
+{
+private:
+  int Id;
+  list<Vocka> **matrica;
+};
+
+ostream &operator<<(ostream &COUT, Vocka &vocka)
+{
+  COUT << vocka.Naziv << " ( " << vocka.TrenutnaStarost << "/" << vocka.ZivotniVek << " ) " << vocka.getGodisnjiPrihod() << endl;
+}
+Vocka &operator++(Vocka &vocka, int)
+{
+  vocka.TrenutnaStarost++;
+  return vocka;
+}
+
+int main()
+{
+  Vocka jabuka("Jabuka", 2500.50, 25);
+  cout << jabuka;
+  jabuka++;
+  jabuka++;
+  jabuka++;
+  jabuka++;
+  jabuka++;
+  jabuka++;
+  cout << jabuka;
+
   return 0;
 }
