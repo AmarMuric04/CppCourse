@@ -4,6 +4,7 @@ using namespace std;
 
 class AbscratctEmployee
 {
+  int id;
   virtual void AskForPromotion() = 0;
 };
 

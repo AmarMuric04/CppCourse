@@ -26,7 +26,7 @@ class SportskaAktivnost : public Aktivnost
   string Sport;
 
 public:
-  SportskaAktivnost() : Sport("fudbal"){};
+  SportskaAktivnost() : Sport("fudbal") {};
   SportskaAktivnost(const string &sport, const char *id, const string &naziv, double budzet, const string &sala) : Aktivnost(id, naziv, budzet, sala), Sport(sport) {}
 
   void PrikaziInformacije()
@@ -40,7 +40,7 @@ class EdukativneAktivnost : public Aktivnost
   string Tema;
 
 public:
-  EdukativneAktivnost() : Tema("istorija"){};
+  EdukativneAktivnost() : Tema("istorija") {};
   EdukativneAktivnost(const string &tema, const char *id, const string &naziv, double budzet, const string &sala) : Aktivnost(id, naziv, budzet, sala), Tema(tema) {}
 
   void PrikaziInformacije() override
@@ -104,4 +104,45 @@ int main()
   uc.PrikaziSveInformacije();
 
   return 0;
+}
+
+// PRE STVARANJA KLASE
+template <typename T>
+class Ekipe
+{
+  vector<T> niz;
+
+  void dodaj(T *a)
+  {
+    niz.push_back(a);
+  }
+
+  void operator+=(T *a)
+  {
+    dodaj(a);
+  }
+
+  for (Tim *tim1 : timovi)
+    for (Tim *tim2 : timovi)
+      if (tim1.broj_poena > tim2.broj_poena)
+        najjaci_tim = tim1;
+
+  for (Tim *tim1 : timovi)
+    cout << tim1;
+
+  ostream &operator<<(ostream &COUT)
+  {
+    COUT << "NESTO SE PRINTA" << endl;
+    return COUT;
+  };
+
+  <, >, <=, >=->bool operatorX(Ime - klase & a)
+  {
+    return this->broj_poena X a.broj_poena;
+  }
+
+  Ime-klase *operator[](int index)
+  {
+    return niz[index];
+  }
 }

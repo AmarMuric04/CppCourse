@@ -16,6 +16,7 @@ public:
   string naziv;
   string drzava;
   int broj_poena;
+  vector<*Ekipa>
 
   Tim()
   {
@@ -36,9 +37,30 @@ public:
     broj_poena = original.broj_poena;
   }
 
+  bool operator==(Tim &other)
+  {
+    return this->price == other.naziv;
+  }
+
+  bool operator<(Tim &other)
+  {
+    return this->price < other.price;
+  }
+
   void ispis_tima(Tim *tim)
   {
     cout << tim;
+  }
+
+  void dodaj(Ekipa *ekipa)
+  {
+    if (ekipa->vrsta != this->)
+      jela.push_back(ekipa);
+  }
+
+  void operator+=(Ekipa *ekipa)
+  {
+    dodaj(ekipa);
   }
 };
 
